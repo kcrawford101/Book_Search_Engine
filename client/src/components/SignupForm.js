@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useMutation } from '@applo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import { Form, Button, Alert } from 'react-bootstrap';
 
 // import { createUser } from '../utils/API';
@@ -35,11 +35,7 @@ const SignupForm = () => {
       const { data } = await addUser({
         variables: { ...userFormData}
       });
-
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
-
+      
       Auth.login(data.addUser.token)
 
     } catch (err) {
