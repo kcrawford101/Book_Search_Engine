@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 
-import { getMe, deleteBook } from '../utils/API';
+// import { getMe, deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 import { useMutation, useQuery } from '@apollo/react-hooks'; 
@@ -24,7 +24,7 @@ const SavedBooks = () => {
     }
 
     try {
-      const {data} = await removeBook({
+      await removeBook({
         variables: { bookId }
       });
       // upon success, remove book's id from localStorage
@@ -43,7 +43,7 @@ const SavedBooks = () => {
     <>
       <Jumbotron fluid className='text-light bg-dark'>
         <Container>
-          <h1>Viewing saved books!</h1>
+          <h1>Viewing {userData.username}'s saved books!</h1>
         </Container>
       </Jumbotron>
       <Container>
@@ -65,6 +65,7 @@ const SavedBooks = () => {
                     Delete this Book!
                   </Button>
                 </Card.Body>
+                {error && <div> Something went wrong...</div>}
               </Card>
             );
           })}
